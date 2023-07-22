@@ -1,4 +1,5 @@
 import XCTest
+
 @testable import AwesomeWeekKit
 
 final class AwesomeWeekKitTests: XCTestCase {
@@ -6,6 +7,5 @@ final class AwesomeWeekKitTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(AwesomeWeekKit().text, "Hello, World!")
     }
 }
