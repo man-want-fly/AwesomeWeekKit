@@ -12,7 +12,7 @@ open class AWColumnHeaderBackground: UICollectionReusableView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor.white
+        backgroundColor = .tertiarySystemBackground
         self.clipsToBounds = true
         setupBottomDivider()
     }

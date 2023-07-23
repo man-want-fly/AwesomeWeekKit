@@ -19,7 +19,7 @@ open class AWAllDayCorner: UICollectionReusableView {
     }
 
     open func setupUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = .tertiarySystemBackground
         self.clipsToBounds = true
         self.addSubview(lblTitle)
         lblTitle.text = "all-day"

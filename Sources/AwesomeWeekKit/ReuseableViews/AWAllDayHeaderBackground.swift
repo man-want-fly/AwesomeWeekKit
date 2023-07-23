@@ -13,7 +13,7 @@ open class AWAllDayHeaderBackground: UICollectionReusableView {
         super.init(frame: frame)
 
         self.clipsToBounds = true
-        self.backgroundColor = .white
+        self.backgroundColor = .tertiarySystemBackground
         setupBottomDivider()
     }
 

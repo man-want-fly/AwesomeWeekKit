@@ -53,17 +53,17 @@ public enum AWHourGridDivision: Int {
     case minutes_30 = 30
 }
 
-public enum AWDayOfWeek: Int {
+public enum AWDayOfWeek: Int, CaseIterable {
     case sunday = 1
     case monday, tuesday, wednesday, thursday, friday, saturday
 }
 
-public enum AWWeekViewScrollType {
+public enum AWWeekViewScrollType: Int, CaseIterable {
     case page
     case section
 }
 
-public enum AWCurrentTimelineType {
+public enum AWCurrentTimelineType: Int, CaseIterable {
     case section  // Display the current time line only in today's section
     case page  // Display the current time line in the whole page including today
 }
