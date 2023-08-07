@@ -268,7 +268,7 @@ open class AWLongPressWeekView: AWWeekView {
 
         } else {
             var contentOffsetX: CGFloat
-            switch scrollType! {
+            switch scrollType {
             case .section:
                 let scrollSections: CGFloat = direction == .left ? -1 : 1
                 contentOffsetX = currentOffset.x - flowLayout.sectionWidth! * scrollSections

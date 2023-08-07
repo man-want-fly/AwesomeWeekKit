@@ -92,9 +92,13 @@ open class AWWeekView: UIView {
             setHorizontalEdgesOffsetX()
         }
     }
-    public var numOfDays: Int!
-    public var scrollType: AWWeekViewScrollType!
-    public var currentTimelineType: AWCurrentTimelineType! {
+    /// default is 3
+    public var numOfDays: Int = 3
+    /// default is page
+    public var scrollType: AWWeekViewScrollType = .page
+    
+    /// default is page
+    public var currentTimelineType: AWCurrentTimelineType = .section {
         didSet {
             let viewClass =
                 currentTimelineType == .section
@@ -106,8 +110,11 @@ open class AWWeekView: UIView {
             )
         }
     }
-    public var firstDayOfWeek: AWDayOfWeek?
-    public var allEventsBySection: [Date: [AWEvent]]! {
+    
+    /// default is sunday
+    public var firstDayOfWeek: AWDayOfWeek = .sunday
+    
+    public var allEventsBySection: [Date: [AWEvent]] = [:] {
         didSet {
             self.isAllDaySupported = allEventsBySection is [Date: [AWAllDayEvent]]
             if isAllDaySupported {
@@ -775,7 +782,7 @@ extension AWWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
 
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
-        self.initDate = self.initDate.add(component: .day, value: addValue!)
+        self.initDate = self.initDate.add(component: .day, value: addValue)
 
         let before = initDate.add(component: .day, value: numOfDays)
         let after = initDate.add(component: .day, value: numOfDays * 2 + 1)
