@@ -16,28 +16,52 @@ public protocol AWWeekViewDelegate: AnyObject {
     ///   - initDate: the new value of initDate
     func initDateDidChange(_ weekView: AWWeekView, initDate: Date)
 
+    /// page 左右滑动时的回调
+    /// - Parameters:
+    ///   - weekView: current AWWeekView
+    ///   - initDate: the new value of initDate
+    ///   - beforeRangeStartDate: 当前显示日期区间起始值的左侧
+    ///   - afterRangeEndDate: 当前显示日期区间结束值的右侧
     func weekView(
         _ weekView: AWWeekView,
-        didScrollToNextWithScrollType: AWWeekViewScrollType
+        didScrollToNextWithScrollType: AWWeekViewScrollType,
+        initDate: Date,
+        beforeRangeStartDate: Date,
+        afterRangeEndDate: Date
     )
-    
+
+    /// page 左右滑动时的回调
+    /// - Parameters:
+    ///   - weekView: current AWWeekView
+    ///   - initDate: the new value of initDate
+    ///   - beforeRangeStartDate: 当前显示日期区间起始值的左侧
+    ///   - afterRangeEndDate: 当前显示日期区间结束值的右侧
     func weekView(
         _ weekView: AWWeekView,
-        didScrollToPreviousWithScrollType: AWWeekViewScrollType
+        didScrollToPreviousWithScrollType: AWWeekViewScrollType,
+        initDate: Date,
+        beforeRangeStartDate: Date,
+        afterRangeEndDate: Date
     )
 }
 
 extension AWWeekViewDelegate {
     func initDateDidChange(_ weekView: AWWeekView, initDate: Date) {}
-    
+
     func weekView(
         _ weekView: AWWeekView,
-        didScrollToNextWithScrollType: AWWeekViewScrollType
+        didScrollToNextWithScrollType: AWWeekViewScrollType,
+        initDate: Date,
+        beforeRangeStartDate: Date,
+        afterRangeEndDate: Date
     ) {}
-    
+
     func weekView(
         _ weekView: AWWeekView,
-        didScrollToPreviousWithScrollType: AWWeekViewScrollType
+        didScrollToPreviousWithScrollType: AWWeekViewScrollType,
+        initDate: Date,
+        beforeRangeStartDate: Date,
+        afterRangeEndDate: Date
     ) {}
 }
 
@@ -752,10 +776,28 @@ extension AWWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
         self.initDate = self.initDate.add(component: .day, value: addValue!)
+
+        let before = initDate.add(component: .day, value: numOfDays)
+        let after = initDate.add(component: .day, value: numOfDays * 2 + 1)
+
         if isNext {
-            baseDelegate?.weekView(self, didScrollToNextWithScrollType: .page)
+            baseDelegate?
+                .weekView(
+                    self,
+                    didScrollToNextWithScrollType: .page,
+                    initDate: initDate,
+                    beforeRangeStartDate: before,
+                    afterRangeEndDate: after
+                )
         } else {
-            baseDelegate?.weekView(self, didScrollToPreviousWithScrollType: .page)
+            baseDelegate?
+                .weekView(
+                    self,
+                    didScrollToPreviousWithScrollType: .page,
+                    initDate: initDate,
+                    beforeRangeStartDate: before,
+                    afterRangeEndDate: after
+                )
         }
         self.forceReload()
     }
