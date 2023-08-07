@@ -15,11 +15,30 @@ public protocol AWWeekViewDelegate: AnyObject {
     ///   - weekView: current AWWeekView
     ///   - initDate: the new value of initDate
     func initDateDidChange(_ weekView: AWWeekView, initDate: Date)
+
+    func weekView(
+        _ weekView: AWWeekView,
+        didScrollToNextWithScrollType: AWWeekViewScrollType
+    )
+    
+    func weekView(
+        _ weekView: AWWeekView,
+        didScrollToPreviousWithScrollType: AWWeekViewScrollType
+    )
 }
 
 extension AWWeekViewDelegate {
-    // Keep it optional
     func initDateDidChange(_ weekView: AWWeekView, initDate: Date) {}
+    
+    func weekView(
+        _ weekView: AWWeekView,
+        didScrollToNextWithScrollType: AWWeekViewScrollType
+    ) {}
+    
+    func weekView(
+        _ weekView: AWWeekView,
+        didScrollToPreviousWithScrollType: AWWeekViewScrollType
+    ) {}
 }
 
 open class AWWeekView: UIView {
@@ -733,6 +752,11 @@ extension AWWeekView: UICollectionViewDelegate, UICollectionViewDelegateFlowLayo
     private func loadNextOrPrevPage(isNext: Bool) {
         let addValue = isNext ? numOfDays : -numOfDays
         self.initDate = self.initDate.add(component: .day, value: addValue!)
+        if isNext {
+            baseDelegate?.weekView(self, didScrollToNextWithScrollType: .pageScroll)
+        } else {
+            baseDelegate?.weekView(self, didScrollToPreviousWithScrollType: .pageScroll)
+        }
         self.forceReload()
     }
 
