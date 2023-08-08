@@ -9,12 +9,12 @@ import UIKit
 
 open class AWAllDayHeader: UICollectionReusableView {
 
-    /// The height of an allDayEvent within the allDayHeader (default: 25)
-    public var eventHeight: CGFloat = 25
+    /// The height of an allDayEvent within the allDayHeader (default: 20)
+    public var eventHeight: CGFloat = 20
     let scrollView = UIScrollView()
     let stackView = UIStackView()
 
-    private let scrollViewPadding: CGFloat = 3
+    private let scrollViewPadding: CGFloat = 2
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +51,7 @@ open class AWAllDayHeader: UICollectionReusableView {
         scrollView.addSubview(stackView)
         stackView.setAnchorConstraintsFullSizeTo(view: scrollView)
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        stackView.spacing = 3
+        stackView.spacing = 2
         stackView.distribution = .equalSpacing
         stackView.axis = .vertical
     }
